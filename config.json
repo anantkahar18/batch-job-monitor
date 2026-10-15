@@ -1,0 +1,51 @@
+{
+  "database": "jobs.db",
+  "state_file": "alert_state.json",
+  "alerts": {
+    "console": true,
+    "slack": { "enabled": false, "webhook_env": "SLACK_WEBHOOK_URL" },
+    "email": {
+      "enabled": false,
+      "smtp_host": "smtp.gmail.com",
+      "smtp_port": 587,
+      "username_env": "SMTP_USER",
+      "password_env": "SMTP_PASSWORD",
+      "from": "monitor@example.com",
+      "to": ["oncall@example.com"]
+    }
+  },
+  "jobs": [
+    {
+      "name": "DAILY_FILE_INGEST",
+      "expected_start": "17:00",
+      "start_grace_minutes": 10,
+      "max_runtime_minutes": 45,
+      "sla_deadline": "18:00",
+      "severity": "warning"
+    },
+    {
+      "name": "EOD_RISK_LOAD",
+      "expected_start": "18:00",
+      "start_grace_minutes": 15,
+      "max_runtime_minutes": 60,
+      "sla_deadline": "20:00",
+      "severity": "critical"
+    },
+    {
+      "name": "REPORT_GENERATION",
+      "expected_start": "19:00",
+      "start_grace_minutes": 15,
+      "max_runtime_minutes": 30,
+      "sla_deadline": "20:30",
+      "severity": "warning"
+    },
+    {
+      "name": "ARCHIVE_PURGE",
+      "expected_start": "21:00",
+      "start_grace_minutes": 15,
+      "max_runtime_minutes": 40,
+      "sla_deadline": "23:00",
+      "severity": "warning"
+    }
+  ]
+}
